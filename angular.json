@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "appCurso": {
+    "proyectoAngular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "appCurso:build:production"
+              "browserTarget": "proyectoAngular:build:production"
             },
             "development": {
-              "browserTarget": "appCurso:build:development"
+              "browserTarget": "proyectoAngular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "appCurso:build"
+            "browserTarget": "proyectoAngular:build"
           }
         },
         "test": {
@@ -106,5 +106,5 @@
       }
     }
   },
-  "defaultProject": "appCurso"
+  "defaultProject": "proyectoAngular"
 }
