@@ -1,6 +1,5 @@
 //Importaciones e inicializaciones
 const router = require("express").Router();
-const basePath = process.env.API_URL_BASE_PATH;
 const user = require("../controllers/user.controller")
 
 module.exports = app => {
