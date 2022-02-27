@@ -1,0 +1,16 @@
+{
+  "name": "servidor",
+  "version": "1.0.0",
+  "description": "Servidor del proyecto de Angular de Eusebio López Robledo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eusebio López Robledo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "cors": "^2.8.5",
+    "mongoose": "^6.1.8"
+  }
+}
