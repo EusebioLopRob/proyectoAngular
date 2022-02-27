@@ -1,0 +1,7 @@
+<p>Lista de usuarios</p>
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let usuario of userlist">
+      Usuario: {{usuario.username}} <br>
+      Password: {{usuario.password}}
+  </li>
+</ul>
