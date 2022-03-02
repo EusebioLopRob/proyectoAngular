@@ -41,4 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-1-frontend/package-lock.json
+!package-lock.json
