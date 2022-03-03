@@ -7,7 +7,7 @@ import { Usuario } from 'src/app/models/usuario.model';
   templateUrl: './userlist.component.html',
   styleUrls: ['./userlist.component.css']
 })
-export class UserlistComponent implements OnInit {
+export class Userlist implements OnInit {
 
   userlist: any = []
 
@@ -16,7 +16,6 @@ export class UserlistComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
   }
-
   getAllUsers(){
     let api = "http://localhost:8091/user/data";
     axios.get(api)
@@ -26,7 +25,6 @@ export class UserlistComponent implements OnInit {
           let instancia = new Usuario(element.username,element.password)
           this.userlist.push(instancia);
         });
-
       }).catch(err=>{
         console.log(err);
       });

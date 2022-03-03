@@ -7,7 +7,11 @@ import axios from 'axios';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'Proyecto Angular';
+  title: string = 'Proyecto Angular de Eusebio López Robledo';
+  name: string = "Eusebio López Robledo";
+  mail: string = "eusebio.lopez.robledo.alu@iesjulioverne.es";
+  company: string = "I.E.S. Julio Verne - Sevilla";
+  
   idnuevoUser = null;
   getAllUsers(){
     console.log(this.idnuevoUser)

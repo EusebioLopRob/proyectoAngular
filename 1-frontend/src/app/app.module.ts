@@ -3,18 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PruebaComponent } from './components/prueba/prueba.component';
-import { Prueba2Component } from './components/prueba2/prueba2.component';
-import { Prueba3Component } from './components/prueba3/prueba3.component';
-import { UserlistComponent } from './components/userlist/userlist.component';
+import { Userlist } from './components/userlist/userlist.component';
+import { UserMain } from './components/user-main/user-main.component';
+import { UserForm } from './components/user-form/user-form.component';
+import { Header } from './components/header/header.component';
+import { Footer } from './components/footer/footer.component';
+import { Navbar } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PruebaComponent,
-    Prueba2Component,
-    Prueba3Component,
-    UserlistComponent
+    Userlist,
+    UserMain,
+    UserForm,
+    Header,
+    Footer,
+    Navbar
   ],
   imports: [
     BrowserModule,
