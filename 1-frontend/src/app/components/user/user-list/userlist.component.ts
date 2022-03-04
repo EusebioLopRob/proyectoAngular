@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-userlist',
@@ -25,7 +25,7 @@ export class Userlist implements OnInit {
           let usuario = new Usuario(element._id, element.username, element.password, element.admin)
           this.userlist.push(usuario);
         });
-      }).catch(err=>{
+      }).catch((err)=>{
         console.log(err);
       });
   }

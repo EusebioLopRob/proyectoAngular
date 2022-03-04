@@ -13,8 +13,8 @@ import { Home } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { Modal } from './components/commons/modal/modal.component';
 import { Login } from './components/login/login.component';
-import { UserService } from './components/services/user.service';
-import { AdminService } from './components/services/admin.service';
+import { UserService } from './services/user.service';
+import { AdminService } from './services/admin.service';
 import { ErrorComponent } from './components/commons/error/error.component';
 
 @NgModule({

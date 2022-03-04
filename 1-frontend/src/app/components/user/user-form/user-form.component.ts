@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 import { Modal } from "bootstrap";
 
 @Component({

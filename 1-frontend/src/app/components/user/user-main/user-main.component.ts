@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, EventEmitter, Output } from '@angular/core';
-import { AdminService } from '../../services/admin.service';
-import { UserService } from '../../services/user.service';
+import { AdminService } from '../../../services/admin.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-main',
