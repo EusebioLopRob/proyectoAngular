@@ -10,12 +10,14 @@ import { Header } from './components/layout/header/header.component';
 import { Footer } from './components/layout/footer/footer.component';
 import { Navbar } from './components/layout/navbar/navbar.component';
 import { Home } from './components/home/home.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PageNotFound } from './components/page-not-found/page-not-found.component';
 import { Modal } from './components/commons/modal/modal.component';
 import { Login } from './components/login/login.component';
 import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
-import { ErrorComponent } from './components/commons/error/error.component';
+import { Error } from './components/commons/error/error.component';
+import { Cuenta } from './components/cuenta/cuenta.component';
+import { Info } from './components/info/info.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { ErrorComponent } from './components/commons/error/error.component';
     Footer,
     Navbar,
     Home,
-    PageNotFoundComponent,
+    PageNotFound,
     Modal,
     Login,
-    ErrorComponent
+    Error,
+    Cuenta,
+    Info
   ],
   imports: [
     BrowserModule,

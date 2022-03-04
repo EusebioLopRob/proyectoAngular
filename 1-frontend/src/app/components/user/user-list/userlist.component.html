@@ -16,8 +16,8 @@
           <div class="row justify-content-center">
             <div class="d-grid col-sm-5 col-8">
               <!-- Botón de activación del modal de editar usuario -->
-              <button type="button" name="" id="" class="btn btn-primary d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendId(usuario.id)">Editar</button>
-              <button type="button" name="" id="" class="btn btn-primary d-sm-none d-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendId(usuario.id)">ED</button>
+              <button type="button" name="" id="" class="btn btn-primary d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendUser(usuario)">Editar</button>
+              <button type="button" name="" id="" class="btn btn-primary d-sm-none d-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendUser(usuario)">ED</button>
             </div>
             <div class="d-grid col-sm-5 col-8 pt-2 pt-sm-0">
               <!-- Botón de activación del modal de confirmacion de eliminar usuario -->
@@ -29,3 +29,4 @@
       </tr>
     </tbody>
 </table>
+<div [ngStyle]="{height: '150px'}"></div>

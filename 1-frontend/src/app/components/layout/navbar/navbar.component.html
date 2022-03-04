@@ -14,13 +14,37 @@
   </li>
   <li class="nav-item" role="presentation">
     <button 
+      class="nav-link" 
+      id="account-tab" 
+      type="button" 
+      role="tab" 
+      aria-controls="account" 
+      aria-selected="false"
+      routerLink="/account" 
+      routerLinkActive="active"      
+    >Mi Cuenta</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button 
+      class="nav-link" 
+      id="info-tab" 
+      type="button" 
+      role="tab" 
+      aria-controls="info" 
+      aria-selected="false"
+      routerLink="/info" 
+      routerLinkActive="active"      
+    >Acerca de</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button 
       class="{{admin? 'nav-link':'nav-link d-none'}}" 
       id="user-tab" 
       type="button" 
       role="tab" 
       aria-controls="user" 
       aria-selected="false"
-      routerLink="/user-main" 
+      routerLink="/admin" 
       routerLinkActive="active"      
     >Usuarios</button>
   </li>

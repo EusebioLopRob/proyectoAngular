@@ -11,8 +11,4 @@ export class Home implements OnInit {
 
   ngOnInit(): void {}
 
-  logout(){
-    sessionStorage.clear();
-    window.location.pathname = "";
-  }
 }

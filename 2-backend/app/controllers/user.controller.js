@@ -84,6 +84,12 @@ async function create(req,res){
             password: userdata.password,
             admin: userdata.admin
         });
+        //Comprobamos duplicado de nommbre
+        let buscaDupe = await AuxFun.findDB(User,{username: dataSchema.username})
+        if(buscaDupe.success && buscaDupe.data && buscaDupe.data[0]){
+            //Si estamos intentando duplicar un nombre de usuario
+            return res.status(200).send({message: "El nombre de usuario ya existe en la base de datos", data: [], code: 3000});
+        }
         //Realizamos el guardado
         let creaUsuario = await AuxFun.saveDB(dataSchema,successMsg,errMsg)
         if(creaUsuario.success){
@@ -110,6 +116,10 @@ async function update(req,res){
     try{
         //Recogemos el id de la petición
         let id = req.params.id;
+        //Comprobamos que no sea el administrador
+        if(id == AdminId){
+            return res.status(200).send({message: "No se puede editar al administrador", data: [], code: 3000});
+        }
         //Declaramos los mensajes
         let findSuccessMsg = "Datos del usuario encontrados";
         let findErrorMsg = "Error al buscar datos del usuario";
@@ -117,10 +127,9 @@ async function update(req,res){
         let buscaUsuario = await AuxFun.findOneDB(User,{_id: id},'',findSuccessMsg,findErrorMsg);
         if(buscaUsuario.success && !buscaUsuario.data){
             //Si no hay datos devolvemos resuesta acorde
-            return res.status(200).send({message: "No existe el usuario solicitado", data: [], code: 2000})
+            return res.status(200).send({message: "No existe el usuario solicitado", data: [], code: 3000})
         } else if(buscaUsuario.success){
-            /*Si hay datos actualizamos al usuario
-            Recogemos los datos de la petición*/
+            //Recogemos los datos de la petición
             let userdata = req.body;
             //Declaramos los mensajes
             let updateSuccessMsg = "Usuario actualizado con éxito";
@@ -128,8 +137,15 @@ async function update(req,res){
             //creamos la estructura para guardar los datos
             let updateData = {
                 username: userdata.username,
-                password: userdata.password
+                password: userdata.password,
+                admin: userdata.admin
             };
+            //Comprobamos duplicado de nommbre
+            let buscaDupe = await AuxFun.findDB(User,{username: updateData.username})
+            if(buscaDupe.success && buscaDupe.data && buscaDupe.data[0]._id.toString() != buscaUsuario.data._id.toString()){
+                //Si estamos intentando duplicar un nombre de usuario
+                return res.status(200).send({message: "El nombre de usuario ya existe en la base de datos", data: [], code: 3000})
+            }
             //Realizamos la actualización
             let actualizaUsuario = await AuxFun.updateOneDB(User,{_id: id},updateData,updateSuccessMsg,updateErrorMsg);
             if (actualizaUsuario.success){
@@ -160,8 +176,9 @@ async function deleteOne(req,res){
     try{
         //Recogemos el id de la petición
         let id = req.params.id;
+        //Comprobamos que no sea el administrador
         if(id == AdminId){
-            return res.status(200).send({message: "No se puede eliminar al administrador", data: [], code: 2000});
+            return res.status(200).send({message: "No se puede eliminar al administrador", data: [], code: 3000});
         }
         //Declaramos los mensajes
         let findSuccessMsg = "Datos del usuario encontrados";

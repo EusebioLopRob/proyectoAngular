@@ -1,0 +1,24 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">Información sobre el proyecto</h3>
+        </div>
+        <h4 class="text-center">Autor</h4>
+        <ul class="list-group list-group-flush" *ngFor="let campo of autor">
+            <li class="list-group-item text-center">{{campo.nombre+': '}} <span class="text-primary">{{campo.valor}}</span></li>  
+        </ul>
+        <h4 class="text-center pt-5">Tecnologías y librerías</h4>
+        <ul class="list-group list-group-flush" *ngFor="let campo of tecnologias">
+            <li class="list-group-item text-center">{{campo.nombre+': '}} <span class="text-primary">{{campo.valor}}</span></li>  
+        </ul>
+        <h4 class="text-center pt-5">Directivas</h4>
+        <ul class="list-group list-group-flush" *ngFor="let campo of directivas">
+            <li class="list-group-item text-center">{{campo.nombre+': '}} <span class="text-primary">{{campo.valor}}</span></li>  
+        </ul>
+        <h4 class="text-center pt-5">Bibliografía</h4>
+        <ul class="list-group list-group-flush" *ngFor="let campo of bibliografia">
+            <li class="list-group-item text-center">{{campo.nombre+': '}} <a class="text-primary" [href]="campo.valor">{{campo.valor}}</a></li>  
+        </ul>
+        <div [ngStyle]="{height: '150px'}"></div>
+    </div>
+</div>

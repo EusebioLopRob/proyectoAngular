@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UserService } from '../../../services/user.service';
 import { Modal } from "bootstrap";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-form',
@@ -11,19 +12,18 @@ import { Modal } from "bootstrap";
 export class UserForm implements OnInit {
 
   @Input() mode: string | undefined
-  @Input() id: string | undefined
+  @Input() sentUser: Usuario | undefined
   @Output() dologin = new EventEmitter<Object>();
-  user: Usuario = new Usuario("","","",false);
-  role: string = "user";
+  public user: Usuario = new Usuario("","","",false);
+  public usernameError: string = "";
+  public passwordError: string = "";
+  public backendReject: string = "";
 
   constructor(private userService: UserService) { }
 
-  updateUser(){
-    this.user.admin = this.role == "admin";
-  }
+  ngOnInit(): void { }
 
-  login(e: MouseEvent) {
-    e.preventDefault();
+  login() {
     this.userService.login({username: this.user.username, password: this.user.password}).then((response)=>{
       let datosRespuesta = response.data
       this.dologin.emit(datosRespuesta.data);
@@ -32,25 +32,48 @@ export class UserForm implements OnInit {
     });
   }
 
-  performAction(e: MouseEvent){
-    e.preventDefault();
-    console.log(this.user)
-    switch(this.mode){
-      case 'add':
-        let dataSchema = {
-          username: this.user.username,
-          password: this.user.password,
-          admin: this.user.admin,
-        }
-        this.userService.createUser(dataSchema).then((response)=>{
-          if(response.data.code==2000){
-            this.closeModal("modalAddUser");
-            window.location.pathname="user-main";
+  onSubmit(f: NgForm){
+    this.backendReject = ""; 
+    this.usernameError = "";
+    this.passwordError = "";
+    if(this.validarForm(f)){
+      switch(this.mode){
+        case 'add':
+          let dataSchema1 = {
+            username: this.user.username,
+            password: this.user.password,
+            admin: this.user.admin==true||this.user.admin=="true"? true:false
           }
-        });
-        break;
-      case 'edit':
-        break;
+          this.userService.createUser(dataSchema1).then((response)=>{
+            if(response.data.code==2000){
+              this.closeModal("modalAddUser");
+              window.location.pathname="admin";
+            }else{
+              this.backendReject = response.data.message;
+            }
+          });
+          break;
+        case 'edit':
+          if(this.sentUser){
+            let dataSchema2 = {
+              username: this.sentUser.username,
+              password: this.sentUser.password,
+              admin: this.sentUser.admin==true||this.sentUser.admin=="true"? true:false
+            }
+            this.userService.updateUser(this.sentUser.id, dataSchema2).then((response)=>{
+              if(response.data.code==2000){
+                this.closeModal("modalEditUser");
+                window.location.pathname="admin";
+              }else{
+                this.backendReject = response.data.message;
+              }
+            })
+          }
+          break;
+        case 'login':
+          this.login();
+          break;
+      }
     }
   }
 
@@ -60,8 +83,22 @@ export class UserForm implements OnInit {
     modal.hide();
   }
 
-  ngOnInit(): void {
-    this.updateUser();
-  }
   
+
+  validarForm(f: NgForm): boolean{
+    let valid: boolean = true;
+    if(f.controls['username'].status=='INVALID'){
+      valid = false;
+      this.usernameError = "Debe introducir un nombre de usuario";
+    }
+    if(f.controls['pass'].status=='INVALID'){
+      valid = false;
+      if(f.controls['pass'].hasError("pattern")){
+        this.passwordError = "Debe introducir una contraseña de 4 o más caracteres";
+      }else{
+        this.passwordError = "Debe introducir una contraseña";
+      }
+    }
+    return valid;
+  }
 }

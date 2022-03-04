@@ -10,6 +10,7 @@ import { UserService } from '../../../services/user.service';
 export class Userlist implements OnInit {
 
   @Output() sendUserId = new EventEmitter<string>();
+  @Output() sendUserObject = new EventEmitter<Usuario>();
   public userlist: any = []
 
   constructor(private userService: UserService) { }
@@ -31,5 +32,8 @@ export class Userlist implements OnInit {
   }
   sendId(id: string){
     this.sendUserId.emit(id);
+  }
+  sendUser(user: Usuario){
+    this.sendUserObject.emit(user);
   }
 }

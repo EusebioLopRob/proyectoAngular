@@ -15,7 +15,7 @@ export class UserService {
     createUser(data: Object) {
         return axios.post(`${this.BasePath}/create`, data)
     }
-    updateUser(id: string|any, data: Usuario) {
+    updateUser(id: string|any, data: Object) {
         return axios.put(`${this.BasePath}/update/${id}`, data)
     }
     deleteUser(id: string|any) {

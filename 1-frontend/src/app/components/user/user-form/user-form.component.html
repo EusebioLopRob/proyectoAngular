@@ -1,27 +1,38 @@
-<form class="d-flex">
+<form class="d-flex" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="col">
         <div class="mb-3">
             <label for="username" class="form-label">{{mode=='add'? 'Nuevo usuario':'Nombre de usuario'}}</label>
-            <input type="text" name="username" id="username"
-                class="{{mode=='login'? 'form-control w-75':'form-control'}}" [(ngModel)]="user.username"
-                placeholder="Introduzca un nombre de usuario..." aria-describedby="helpId" required>
-            <small id="helpId" class="text-muted" *ngIf="mode=='add'">El nombre de usuario no puede estar
-                duplidado</small>
+            <input type="text" name="username" id="username" *ngIf="mode!='edit'"
+                ngClass="{{mode=='login'? 'form-control w-75':'form-control'}}" [(ngModel)]="user.username"
+                placeholder="Introduzca un nombre de usuario..." required>
+            <input type="text" name="username" id="username" *ngIf="sentUser"
+                ngClass="{{mode=='login'? 'form-control w-75':'form-control'}}" [(ngModel)]="sentUser.username"
+                placeholder="Introduzca un nombre de usuario..." required>
+            <small class="text-danger">{{usernameError}}</small>
         </div>
         <div class="mb-3">
             <label for="pass" class="form-label">Contraseña</label>
-            <input type="text" name="pass" id="pass" class="{{mode=='login'? 'form-control w-75':'form-control'}}"
-                [(ngModel)]="user.password" placeholder="Introduzca una contraseña..." aria-describedby="helpId"
+            <input type="text" name="pass" id="pass" ngClass="{{mode=='login'? 'form-control w-75':'form-control'}}" *ngIf="mode!='edit'"
+                [(ngModel)]="user.password" placeholder="Introduzca una contraseña..." 
                 required pattern=".{4,}" title="Introduzca al menos 4 caracteres">
-            <small id="helpId" class="text-muted" *ngIf="mode=='add'">La contraseña debe tener al menos 4
-                caracteres</small>
+            <input type="text" name="pass" id="pass" ngClass="{{mode=='login'? 'form-control w-75':'form-control'}}" *ngIf="sentUser"
+                [(ngModel)]="sentUser.password" placeholder="Introduzca una contraseña..." 
+                required pattern=".{4,}" title="Introduzca al menos 4 caracteres">
+            <small class="text-danger">{{passwordError}}</small>
         </div>
 
-        <div class="mb-5" *ngIf="mode!='login'">
+        <div class="mb-5" *ngIf="mode=='add'">
             <label for="role" class="form-label">Rol</label>
-            <select class="form-control" name="role" id="role" [(ngModel)]="role" (change)="updateUser()">
-                <option [value]="'user'">Usuario normal</option>
-                <option [value]="'admin'">Administrador</option>
+            <select class="form-control" name="role" id="role" [(ngModel)]="user.admin">
+                <option [value]="false">Usuario normal</option>
+                <option [value]="true">Administrador</option>
+            </select>
+        </div>
+        <div class="mb-5" *ngIf="sentUser">
+            <label for="role" class="form-label">Rol</label>
+            <select class="form-control" name="role" id="role" [(ngModel)]="sentUser.admin">
+                <option [value]="false">Usuario normal</option>
+                <option [value]="true">Administrador</option>
             </select>
         </div>
 
@@ -29,8 +40,9 @@
         <ng-template #thenBlock>
             <div class="mb-3 row">
                 <div class="col-3">
-                    <button type="submit" class="{{mode=='add'? 'btn btn-success w-100':'btn btn-primary w-100'}}"
-                        (click)="performAction($event)">{{mode=='add'? 'Añadir':'Actualizar'}}</button>
+                    <button type="submit" ngClass="{{mode=='add'? 'btn btn-success w-100':'btn btn-primary w-100'}}">
+                        {{mode=='add'? 'Añadir':'Actualizar'}}
+                    </button>
                 </div>
                 <div class="col-3">
                     <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Cancelar</button>
@@ -38,9 +50,10 @@
             </div>
         </ng-template>
         <ng-template #elseBlock>
-            <div class="col-6 col-sm-3">
-                <button type="submit" class="btn btn-success w-100" (click)="login($event)">Login</button>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success w-25">Login</button>
             </div>
         </ng-template>
+        <small class="text-danger">{{backendReject}}</small>
     </div>
 </form>
