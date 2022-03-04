@@ -16,6 +16,8 @@ module.exports = app => {
     router.put("/update/:id", user.update);
     // Petición para eliminar un usuario
     router.delete("/delete/:id", user.deleteOne);
+    // Petición para hacer login
+    router.post("/login", user.login)
     /***************************/
     app.use("/user", router);
 };

@@ -1,0 +1,40 @@
+<form class="d-flex">
+    <div class="col">
+        <div class="mb-3">
+            <label for="username" class="form-label">{{mode=='add'? 'Nuevo usuario':'Nombre de usuario'}}</label>
+            <input type="text" name="username" id="username" class="{{mode=='login'? 'form-control w-75':'form-control'}}" [(ngModel)]="user.username" placeholder="Introduzca un nombre de usuario..." aria-describedby="helpId" required>
+            <small id="helpId" class="text-muted" *ngIf="mode=='add'">El nombre de usuario no puede estar duplidado</small>
+        </div>
+        <div class="mb-3">
+            <label for="pass" class="form-label">Contraseña</label>
+            <input type="text" name="pass" id="pass" class="{{mode=='login'? 'form-control w-75':'form-control'}}" [(ngModel)]="user.password" placeholder="Introduzca una contraseña..." aria-describedby="helpId" required pattern=".{4,}" title="Introduzca al menos 4 caracteres">
+            <small id="helpId" class="text-muted" *ngIf="mode=='add'">La contraseña debe tener al menos 4 caracteres</small>
+        </div>
+        <!--
+        <div class="mb-3" *ngIf="mode!='login'">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="admin" [(ngModel)]="user.admin">
+                <label class="form-check-label" for="admin">
+                  Administrador
+                </label>
+            </div>
+        </div>
+        -->
+        <div *ngIf="mode!='login'; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <div class="mb-3 row">
+                <div class="col-3">
+                    <button type="submit" class="{{mode=='add'? 'btn btn-success w-100':'btn btn-primary w-100'}}" (click)="performAction($event)">{{mode=='add'? 'Añadir':'Actualizar'}}</button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #elseBlock>
+            <div class="col-6 col-sm-3">
+                <button type="submit" class="btn btn-success w-100" (click)="login($event)">Login</button>
+            </div>
+        </ng-template>
+    </div>
+</form>

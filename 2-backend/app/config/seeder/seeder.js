@@ -20,7 +20,8 @@ async function createUserAdmin(){
             let userAdminData = new User({
                 _id: AdminId,
                 username: "admin",
-                password: "admin"
+                password: "admin",
+                admin: true
             });
             //Declaramos los mensajes
             let createSuccesMessage = "Usuario administrador creado con éxito";
@@ -40,5 +41,6 @@ async function createUserAdmin(){
 
 //Exportamos la función
 module.exports = {
-    createUserAdmin
+    createUserAdmin,
+    AdminId
 }

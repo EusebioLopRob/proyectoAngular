@@ -1,0 +1,67 @@
+<!-- Modal de añadir usuario-->
+<app-modal
+    [id]="'modalAddUser'"
+    [footer]="false"
+    [title]="'Añadir usuario'"
+>
+    <div content>
+        <app-user-form [mode]="'add'"></app-user-form>
+    </div>
+</app-modal>
+
+<!-- Modal de editar usuario-->
+<app-modal
+    [id]="'modalEditUser'"
+    [footer]="false"
+    [title]="'Editar usuario'"
+>
+    <div content>
+        <app-user-form [mode]="'edit'"></app-user-form>
+    </div>
+</app-modal>
+
+<!-- Modal de eliminar usuario-->
+<app-modal
+    [id]="'modalDeleteUser'"
+    [footer]="false"
+    [title]="'Eliminar usuario'"
+>
+    <div content>
+        <div class="container text-center">
+            <h5 class="text-danger">Esta acción es irreversible ¿Continuar?</h5>
+            <div class="mt-3 row">
+                <div class="col-4">
+                    <button type="button" class="btn btn-danger w-100" (click)="confirmDelete()">Confirmar</button>
+                </div>
+                <div class="col-8">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">No, me he equivocado</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-modal>
+
+<!-- Contenedor principal de la vista de usuario-->
+<div class="container mt-4">
+    <div class="card">
+        <img class="card-img-top" alt="">
+        <div class="card-header">
+            <div class="row">
+                <h4 class="card-title col">Tabla de usuarios</h4>
+                <div class="col-4">
+                    <!-- Botón de activación del modal de añadir usuario -->
+                    <button type="button" class="btn btn-success btn-lg d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#modalAddUser">
+                        + Añadir usuario
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg d-lg-none" data-bs-toggle="modal" data-bs-target="#modalAddUser">
+                        +
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Tabla de usuarios -->
+            <app-userlist (sendUserId)="getUserId($event)"></app-userlist>
+        </div>
+    </div>
+</div>

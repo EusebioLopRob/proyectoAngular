@@ -1,6 +1,7 @@
 //Importaciones
 const AuxFun = require("../utils/auxiliary.functions");
 const User = require("../models").user;
+const AdminId = require("../config/seeder/seeder").AdminId;
 
 /**
  * Esta función devuelve los datos de todos los usuarios de la base de datos
@@ -82,7 +83,7 @@ async function create(req,res){
             username: userdata.username,
             password: userdata.password
         });
-        //Realizamos la búsqueda
+        //Realizamos el guardado
         let creaUsuario = await AuxFun.saveDB(dataSchema,successMsg,errMsg)
         if(creaUsuario.success){
             //Si la operación es un éxito enviamos los datos
@@ -158,6 +159,9 @@ async function deleteOne(req,res){
     try{
         //Recogemos el id de la petición
         let id = req.params.id;
+        if(id == AdminId){
+            return res.status(200).send({message: "No se puede eliminar al administrador", data: [], code: 2000});
+        }
         //Declaramos los mensajes
         let findSuccessMsg = "Datos del usuario encontrados";
         let findErrorMsg = "Error al buscar datos del usuario";
@@ -191,11 +195,49 @@ async function deleteOne(req,res){
     }  
 }
 
+/**
+ * Esta función busca un usuario en la base de datos a partir de un username y una password
+ * @param {Object} req Objeto de petición los datos del usuario que quiere hacer login vienen en req.body.data
+ * @param {Object} res Objeto de respuesta
+ * @returns Respuesta con datos
+ */
+async function login(req,res){
+    try{
+        //Recogemos los datos de la petición
+        let userdata = req.body;
+        //Declaramos los mensajes
+        let successMsg = "Datos del usuario encontrados";
+        let errMsg = "Error al buscar datos del usuario";
+        //creamos la estructura para guardar los datos
+        let userData = {
+            username: userdata.username,
+            password: userdata.password
+        };
+        //Realizamos la búsqueda
+        let buscaUsuario = await AuxFun.findOneDB(User,{username: userData.username, password: userData.password},'',successMsg,errMsg);
+        if(buscaUsuario.success && !buscaUsuario.data){
+            //Si no hay datos devolvemos resuesta acorde
+            return res.status(200).send({message: "No existe el usuario solicitado", code: 2000})
+        } else if(buscaUsuario.success){
+            //Si hay datos devolvemos los datos
+            return res.status(200).send({message: buscaUsuario.message, data: buscaUsuario.data, code: 2000});
+        } else {
+            //Si se produce un error el la búsqueda enviamos respuesta de error
+            return res.status(500).send({message: buscaUsuario.message, code: 3000});
+        }
+    }catch(err){
+        //Si se produce un error inesperado enviamos respuesta de error (Depuración)
+        console.log("Controlador: user.controller.create: "+ err);
+        return res.status(500).send({message: "Error desconocido", code: 3000});
+    }
+}
+
 //Exportamos las funciones de los endpoints
 module.exports = {
     findAll,
     find,
     create,
     update,
-    deleteOne
+    deleteOne,
+    login
 }

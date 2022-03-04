@@ -1,15 +1,13 @@
 <app-header [title]="title"></app-header>
-<app-navbar></app-navbar>
-<div class="container">
-  <app-user-main></app-user-main>
-  <app-user-main></app-user-main>
-  <app-user-main></app-user-main>
-  <app-user-main></app-user-main>
-  <app-user-main></app-user-main>
-</div>
-<app-footer
-  [name]="name"
-  [mail]="mail"
-  [company]="company"
-  ></app-footer>
-<router-outlet></router-outlet>
+  <div *ngIf="logged=='logged'; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+  </ng-template>
+  <ng-template #elseBlock>
+    <div class="container">
+      <app-login (dologin)="login($event)"></app-login>
+    </div>
+  </ng-template>
+<app-footer [name]="name" [mail]="mail" [company]="company">
+</app-footer>
