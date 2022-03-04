@@ -10,6 +10,9 @@ export class Header implements OnInit {
   //Variable importada
   @Input() title: string | undefined;
 
+  //Variable para usar un pipe
+  hoy: Date = new Date();
+
   constructor() { }
 
   ngOnInit(): void {

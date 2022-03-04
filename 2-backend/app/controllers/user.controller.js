@@ -81,7 +81,8 @@ async function create(req,res){
         //creamos la estructura para guardar los datos
         let dataSchema = new User({
             username: userdata.username,
-            password: userdata.password
+            password: userdata.password,
+            admin: userdata.admin
         });
         //Realizamos el guardado
         let creaUsuario = await AuxFun.saveDB(dataSchema,successMsg,errMsg)

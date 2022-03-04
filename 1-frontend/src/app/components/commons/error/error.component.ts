@@ -13,7 +13,7 @@ export class ErrorComponent implements OnInit {
     setTimeout(()=>{
       sessionStorage.clear();
       window.location.pathname = "";
-    }, 3000);
+    }, 6000);
   }
 
 }

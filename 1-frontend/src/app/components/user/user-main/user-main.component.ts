@@ -9,10 +9,13 @@ import { UserService } from '../../../services/user.service';
 })
 export class UserMain implements AfterContentInit {
   public selectedId: string = "";
+  public adminConfirmed: boolean = false;
   constructor(private adminService: AdminService, private userService: UserService) { }
   async ngAfterContentInit(): Promise<void> {
     if(!await this.adminService.isUserAdmin()){
       window.location.pathname = "error"
+    }else{
+      this.adminConfirmed = true;
     }
   }
   confirmDelete(){

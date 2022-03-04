@@ -16,7 +16,7 @@
     [title]="'Editar usuario'"
 >
     <div content>
-        <app-user-form [mode]="'edit'"></app-user-form>
+        <app-user-form [mode]="'edit'" [id]="selectedId"></app-user-form>
     </div>
 </app-modal>
 
@@ -41,8 +41,8 @@
     </div>
 </app-modal>
 
-<!-- Contenedor principal de la vista de usuario-->
-<div class="container mt-4">
+<!-- Contenedor principal de la vista de usuario (solo se muestra a administradores) -->
+<div class="container mt-4" *ngIf="adminConfirmed">
     <div class="card">
         <img class="card-img-top" alt="">
         <div class="card-header">
@@ -50,10 +50,10 @@
                 <h4 class="card-title col">Tabla de usuarios</h4>
                 <div class="col-4">
                     <!-- Botón de activación del modal de añadir usuario -->
-                    <button type="button" class="btn btn-success btn-lg d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#modalAddUser">
+                    <button type="button" class="btn btn-success btn-lg d-none d-md-block" data-bs-toggle="modal" data-bs-target="#modalAddUser">
                         + Añadir usuario
                     </button>
-                    <button type="button" class="btn btn-success btn-lg d-lg-none" data-bs-toggle="modal" data-bs-target="#modalAddUser">
+                    <button type="button" class="btn btn-success btn-lg d-md-none" data-bs-toggle="modal" data-bs-target="#modalAddUser">
                         +
                     </button>
                 </div>

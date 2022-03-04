@@ -14,8 +14,13 @@ export class UserForm implements OnInit {
   @Input() id: string | undefined
   @Output() dologin = new EventEmitter<Object>();
   user: Usuario = new Usuario("","","",false);
+  role: string = "user";
 
   constructor(private userService: UserService) { }
+
+  updateUser(){
+    this.user.admin = this.role == "admin";
+  }
 
   login(e: MouseEvent) {
     e.preventDefault();
@@ -42,7 +47,7 @@ export class UserForm implements OnInit {
             this.closeModal("modalAddUser");
             window.location.pathname="user-main";
           }
-        })
+        });
         break;
       case 'edit':
         break;
@@ -56,9 +61,7 @@ export class UserForm implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.id){
-
-    }
+    this.updateUser();
   }
   
 }
