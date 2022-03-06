@@ -3,22 +3,32 @@
         <div class="card-body">
             <h3 class="card-title text-center">Información sobre el proyecto</h3>
         </div>
-        <h4 class="text-center">Autor</h4>
-        <ul class="list-group list-group-flush" *ngFor="let campo of autor">
-            <li class="list-group-item text-center">{{campo.nombre+': '}} <span class="text-primary">{{campo.valor}}</span></li>  
-        </ul>
-        <h4 class="text-center pt-5">Tecnologías y librerías</h4>
-        <ul class="list-group list-group-flush" *ngFor="let campo of tecnologias">
-            <li class="list-group-item text-center">{{campo.nombre+': '}} <span class="text-primary">{{campo.valor}}</span></li>  
-        </ul>
-        <h4 class="text-center pt-5">Directivas</h4>
-        <ul class="list-group list-group-flush" *ngFor="let campo of directivas">
-            <li class="list-group-item text-center">{{campo.nombre+': '}} <span class="text-primary">{{campo.valor}}</span></li>  
-        </ul>
-        <h4 class="text-center pt-5">Bibliografía</h4>
-        <ul class="list-group list-group-flush" *ngFor="let campo of bibliografia">
-            <li class="list-group-item text-center">{{campo.nombre+': '}} <a class="text-primary" [href]="campo.valor">{{campo.valor}}</a></li>  
-        </ul>
-        <div [ngStyle]="{height: '150px'}"></div>
+        <div class="accordion accordion-flush" id="acordeon">
+            <div class="accordion-item" *ngFor="let item of content; index as i">
+                <h2 class="accordion-header" [id]="'flush-heading'+i">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#flush-collapse'+i" aria-expanded="false"
+                        [attr.aria-controls]="'flush-collapse'+i">
+                        {{item.nombre}}
+                    </button>
+                </h2>
+                <div [id]="'flush-collapse'+i" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="'flush-heading'+i" data-bs-parent="#acordeon">
+                    <ul class="list-group list-group-flush" *ngFor="let campo of item.contenido">
+                        <div *ngIf="item.nombre!='Bibliografía'; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <li class="list-group-item text-center">{{campo.nombre+': '}} <span
+                                    class="text-primary">{{campo.valor}}</span></li>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <li class="list-group-item text-center">{{campo.nombre+' => '}}<a
+                                    class="btn btn-primary"
+                                    [href]="campo.valor">Visitar</a></li>
+                        </ng-template>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
+    <div [ngStyle]="{height: '150px'}"></div>
 </div>

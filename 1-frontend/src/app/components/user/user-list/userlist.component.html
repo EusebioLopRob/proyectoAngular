@@ -1,28 +1,41 @@
 <table class="table table-striped table-responsive text-center mt-4 align-items-center">
   <thead class="thead-default bg-dark text-white">
     <tr>
-      <th>USER</th>
-      <th>PASS</th>
-      <th>ADMIN</th>
-      <th>ACCIONES</th>
+      <th class="align-middle"><i class="bi bi-person-circle"></i>&nbsp;USER</th>
+      <th class="align-middle"><i class="bi bi-envelope-slash"></i>&nbsp;PASS</th>
+      <th class="align-middle"><i class="bi bi-person-lines-fill"></i>&nbsp;ADMIN</th>
+      <th class="align-middle"><i class="bi bi-hammer"></i>&nbsp;ACCIONES</th>
     </tr>
     </thead>
     <tbody>
       <tr *ngFor="let usuario of userlist">
         <td class="align-middle">{{usuario.username}}</td>
         <td class="align-middle">{{usuario.password}}</td>
-        <td class="align-middle">{{usuario.admin? "Sí":"No"}}</td>
+        <td [ngClass]="usuario.admin? 'align-middle text-success':'align-middle text-danger'"
+            [ngStyle]="{'font-weight': 'bold'}">
+          {{usuario.admin? "Sí":"No"}}
+        </td>
         <td>
           <div class="row justify-content-center">
             <div class="d-grid col-sm-5 col-8">
               <!-- Botón de activación del modal de editar usuario -->
-              <button type="button" name="" id="" class="btn btn-primary d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendUser(usuario)">Editar</button>
-              <button type="button" name="" id="" class="btn btn-primary d-sm-none d-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendUser(usuario)">ED</button>
+              <button type="button" name="" id="" class="btn btn-primary d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendUser(usuario)">
+                <i class="bi bi-pencil-square"></i>
+                Editar
+              </button>
+              <button type="button" name="" id="" class="btn btn-primary d-sm-none d-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendUser(usuario)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
             </div>
             <div class="d-grid col-sm-5 col-8 pt-2 pt-sm-0">
               <!-- Botón de activación del modal de confirmacion de eliminar usuario -->
-              <button type="button" name="" id="" class="btn btn-danger d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalDeleteUser" (click)="sendId(usuario.id)">Eliminar</button>
-              <button type="button" name="" id="" class="btn btn-danger d-sm-none d-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendId(usuario.id)">EL</button>
+              <button type="button" name="" id="" class="btn btn-danger d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#modalDeleteUser" (click)="sendId(usuario.id)">
+                <i class="bi bi-x-circle"></i>
+                Eliminar
+              </button>
+              <button type="button" name="" id="" class="btn btn-danger d-sm-none d-block" data-bs-toggle="modal" data-bs-target="#modalEditUser" (click)="sendId(usuario.id)">
+                <i class="bi bi-x-circle"></i>
+              </button>
             </div>
           </div>
         </td>

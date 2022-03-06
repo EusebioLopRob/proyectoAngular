@@ -142,7 +142,7 @@ async function update(req,res){
             };
             //Comprobamos duplicado de nommbre
             let buscaDupe = await AuxFun.findDB(User,{username: updateData.username})
-            if(buscaDupe.success && buscaDupe.data && buscaDupe.data[0]._id.toString() != buscaUsuario.data._id.toString()){
+            if(buscaDupe.success && buscaDupe.data && buscaDupe.data[0] && buscaDupe.data[0]._id && buscaDupe.data[0]._id.toString() != buscaUsuario.data._id.toString()){
                 //Si estamos intentando duplicar un nombre de usuario
                 return res.status(200).send({message: "El nombre de usuario ya existe en la base de datos", data: [], code: 3000})
             }

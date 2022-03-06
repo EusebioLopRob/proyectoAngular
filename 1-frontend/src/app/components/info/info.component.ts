@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info.component.css']
 })
 export class Info implements OnInit {
+
   public autor: any = [
     {
       nombre: "Nombre",
@@ -46,6 +47,10 @@ export class Info implements OnInit {
       valor: "v5.1.3"
     },
     {
+      nombre: "Bootstrap Icons",
+      valor: "v1.8.1"
+    },
+    {
       nombre: "jQuery",
       valor: "v3.6.0"
     },
@@ -81,7 +86,7 @@ export class Info implements OnInit {
     },
     {
       nombre: "ngStyle",
-      valor: "Usada en los componentes Info y Userlist"
+      valor: "Usada en practicamente todos los componentes"
     },
     {
       nombre: "ngClass",
@@ -110,11 +115,11 @@ export class Info implements OnInit {
       valor: "https://angular.io/docs"
     },
     {
-      nombre: "Stack overflow para dudas puntuales",
+      nombre: "Stack Overflow para dudas puntuales",
       valor: "https://stackoverflow.com"
     },
     {
-      nombre: "Documentación Oficial de Bootstrap 5",
+      nombre: "Documentación oficial de Bootstrap 5",
       valor: "https://getbootstrap.com/docs/5.1/getting-started/introduction/"
     },
     {
@@ -126,7 +131,7 @@ export class Info implements OnInit {
       valor: "https://expressjs.com"
     },
     {
-      nombre: "Documentación oficial de inicio de MongoDB",
+      nombre: "Documentación oficial de MongoDB",
       valor: "https://docs.mongodb.com/launch-manage/"
     },
     {
@@ -138,7 +143,7 @@ export class Info implements OnInit {
       valor: "https://mongoosejs.com/docs/api.html"
     },
     {
-      nombre: "NPM Docs para consultar informacion de la librería CORS",
+      nombre: "NPM: informacion de la librería CORS",
       valor: "https://www.npmjs.com/package/cors"
     },
     {
@@ -146,6 +151,25 @@ export class Info implements OnInit {
       valor: ""
     },
   ];
+
+  public content: any = [
+    {
+      nombre: 'Autor',
+      contenido: this.autor
+    },
+    {
+      nombre: 'Tecnologías y librerías',
+      contenido: this.tecnologias
+    },
+    {
+      nombre: 'Directivas',
+      contenido: this.directivas
+    },
+    {
+      nombre: 'Bibliografía',
+      contenido: this.bibliografia
+    }
+  ]
 
   constructor() { }
 

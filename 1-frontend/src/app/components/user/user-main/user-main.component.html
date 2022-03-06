@@ -28,7 +28,10 @@
 >
     <div content>
         <div class="container text-center">
-            <h5 class="text-danger">{{backendReject!=''? backendReject:'Esta acción es irreversible ¿Continuar?'}}</h5>
+            <h5 class="text-danger">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                {{backendReject!=''? backendReject:'Esta acción es irreversible ¿Continuar?'}}
+            </h5>
             <div class="mt-3 row">
                 <div class="col-4" *ngIf="backendReject==''">
                     <button type="button" class="btn btn-danger w-100" (click)="confirmDelete()">Confirmar</button>
@@ -51,10 +54,10 @@
                 <div class="col-4">
                     <!-- Botón de activación del modal de añadir usuario -->
                     <button type="button" class="btn btn-success btn-lg d-none d-md-block" data-bs-toggle="modal" data-bs-target="#modalAddUser">
-                        + Añadir usuario
+                        <i class="bi bi-person-plus-fill"></i> Añadir usuario
                     </button>
                     <button type="button" class="btn btn-success btn-lg d-md-none" data-bs-toggle="modal" data-bs-target="#modalAddUser">
-                        +
+                        <i class="bi bi-person-plus-fill"></i>
                     </button>
                 </div>
             </div>

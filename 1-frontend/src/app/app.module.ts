@@ -18,6 +18,7 @@ import { AdminService } from './services/admin.service';
 import { Error } from './components/commons/error/error.component';
 import { Cuenta } from './components/cuenta/cuenta.component';
 import { Info } from './components/info/info.component';
+import { Ficha } from './components/home/ficha/ficha.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { Info } from './components/info/info.component';
     Login,
     Error,
     Cuenta,
-    Info
+    Info,
+    Ficha
   ],
   imports: [
     BrowserModule,

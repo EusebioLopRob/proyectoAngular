@@ -11,7 +11,8 @@ export class Header implements OnInit {
   @Input() title: string | undefined;
 
   //Variable para usar un pipe que nos monte un reloj con la fecha
-  hoy: Date = new Date();
+  public hoy: Date = new Date();
+  public iconSize: string = "150%";
 
   constructor() { }
 

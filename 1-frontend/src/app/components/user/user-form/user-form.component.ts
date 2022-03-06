@@ -51,6 +51,8 @@ export class UserForm implements OnInit {
             }else{
               this.backendReject = response.data.message;
             }
+          }).catch((err)=>{
+            console.log(err);
           });
           break;
         case 'edit':

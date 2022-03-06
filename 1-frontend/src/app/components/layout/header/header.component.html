@@ -1,5 +1,14 @@
 <div class="container-fluid bg-primary text-white">
-    <h2 class="text-center pt-2 pb-2">{{title}}</h2>
+    <h2 class="text-center pt-2">{{title}}</h2>
     <!-- Nuestro hermoso pipe -->
-    <p class="text-end"><small>{{ hoy | date:'dd/MM/y - HH:mm:ss'}}</small></p>
+    <p class="text-end d-none d-sm-block">
+        <i class="bi bi-calendar-date" [ngStyle]="{'font-size': iconSize}"></i>
+        &nbsp;
+        <small>{{ hoy | date:'dd/MM/y - HH:mm:ss'}}</small>
+    </p>
+    <p class="text-center d-sm-none">
+        <i class="bi bi-calendar-date" [ngStyle]="{'font-size': iconSize}"></i>
+        &nbsp;
+        <small>{{ hoy | date:'dd/MM/y - HH:mm:ss'}}</small>
+    </p>
 </div>

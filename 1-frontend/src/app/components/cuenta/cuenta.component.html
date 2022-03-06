@@ -6,10 +6,13 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item text-center">Nombre de usuario: <span class="text-primary">{{user.username}}</span></li>
             <li class="list-group-item text-center">Contraseña: <span class="text-primary">{{user.password}}</span></li>
-            <li class="list-group-item text-center">Permisos de administrador: <span [class]="user.admin?'text-success':'text-danger'">{{user.admin? 'Sí':'No'}}</span></li>
+            <li class="list-group-item text-center">Permisos de administrador: <span [ngClass]="user.admin?'text-success':'text-danger'">{{user.admin? 'Sí':'No'}}</span></li>
         </ul>
         <div class="pb-3 pt-3 d-flex justify-content-center">
-            <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+            <button type="button" class="btn btn-danger" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i> &nbsp;
+                Logout
+            </button>
         </div>
     </div>
 </div>
