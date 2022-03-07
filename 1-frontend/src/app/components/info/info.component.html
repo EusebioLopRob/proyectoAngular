@@ -3,7 +3,7 @@
         <div class="card-body">
             <h3 class="card-title text-center">Información sobre el proyecto</h3>
         </div>
-        <div class="accordion accordion-flush" id="acordeon">
+        <div class="accordion accordion-flush pb-4" id="acordeon">
             <div class="accordion-item" *ngFor="let item of content; index as i">
                 <h2 class="accordion-header" [id]="'flush-heading'+i">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -21,8 +21,8 @@
                                     class="text-primary">{{campo.valor}}</span></li>
                         </ng-template>
                         <ng-template #elseBlock>
-                            <li class="list-group-item text-center">{{campo.nombre+' => '}}<a
-                                    class="btn btn-primary"
+                            <li class="list-group-item text-center">{{campo.valor!=''? campo.nombre+' => ':campo.nombre}}<a
+                                    class="btn btn-primary" *ngIf="campo.valor!=''"
                                     [href]="campo.valor">Visitar</a></li>
                         </ng-template>
                     </ul>

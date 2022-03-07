@@ -19,6 +19,7 @@ import { Error } from './components/commons/error/error.component';
 import { Cuenta } from './components/cuenta/cuenta.component';
 import { Info } from './components/info/info.component';
 import { Ficha } from './components/home/ficha/ficha.component';
+import { ShipService } from './services/ship.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { Ficha } from './components/home/ficha/ficha.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [UserService, AdminService],
+  providers: [UserService, AdminService, ShipService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

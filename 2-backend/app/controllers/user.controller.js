@@ -1,7 +1,7 @@
 //Importaciones
 const AuxFun = require("../utils/auxiliary.functions");
 const User = require("../models").user;
-const AdminId = require("../config/seeder/seeder").AdminId;
+const AdminId = require("../config/constants/seeder.data").AdminId;
 
 /**
  * Esta función devuelve los datos de todos los usuarios de la base de datos

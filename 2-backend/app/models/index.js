@@ -9,7 +9,8 @@ const db = {
     /******************************/
     // ÍNDICE DE MODELOS DE DATOS //
     /******************************/
-    user: require("./users/user.model")(mongoose)
+    user: require("./users/user.model")(mongoose),
+    ship: require("./ships/ship.model")(mongoose)
 };
 
 //Exportaciones

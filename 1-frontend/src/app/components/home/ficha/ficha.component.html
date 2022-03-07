@@ -1,8 +1,33 @@
 <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <img [src]="imgBasePath+data.src" class="card-img-top" [alt]="data.alt" height="200">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">{{data.name}}</h5>
+      <p class="card-text" [ngStyle]="{height: '90px'}">{{data.description}}</p>
+      <table class="table table-responsive text-center">
+        <thead class="thead-default bg-dark text-white">
+          <tr>
+            <th>Tipo</th>
+            <th>Nación</th>
+            <div [ngSwitch]="data.type">
+              <th *ngSwitchCase="'BB'">Calibre</th>
+              <th *ngSwitchCase="'DD'">Velocidad</th>
+              <th *ngSwitchCase="'CV'">Aeronaves</th>
+              <th *ngSwitchDefault>Tripulación</th>
+            </div>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{data.type}}</td>
+              <td>{{data.nation}}</td>
+              <div [ngSwitch]="data.type">
+                <td *ngSwitchCase="'BB'" [ngClass]="data.unit=='cm'? 'text-success':'text-danger'">{{data.caliber+" "+data.unit}}</td>
+                <td *ngSwitchCase="'DD'">{{data.speed+" "+data.unit}}</td>
+                <td *ngSwitchCase="'CV'">{{data.planes}}</td>
+                <td *ngSwitchDefault>{{data.crew}}</td>
+              </div>
+            </tr>
+          </tbody>
+      </table>
     </div>
 </div>

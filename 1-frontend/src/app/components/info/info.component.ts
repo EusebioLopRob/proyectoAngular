@@ -94,11 +94,11 @@ export class Info implements OnInit {
     },
     {
       nombre: "ngFor",
-      valor: "Usada en los componentes Info y Userlist"
+      valor: "Usada en los componentes Info, Userlist, y Home"
     },
     {
       nombre: "ngSwitch",
-      valor: "Usada en el componente Home"
+      valor: "Usada dos veces en el componente Home"
     },
     {
       nombre: "@Input()",

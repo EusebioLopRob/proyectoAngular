@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 
 //Rutas de la aplicación
 require("./app/routes/user.routes")(app);
+require("./app/routes/ship.routes")(app);
 
 // Establecer la conexión a la base de datos
 // usando los parámetros de conexión deseados
@@ -33,6 +34,7 @@ db.mongoose
   .then( async () => {
     console.log("Conectado con la base de datos " + db.dburl);
     seeder.createUserAdmin();
+    seeder.generateShipData();
   })
   .catch(err => {
     console.log(err);

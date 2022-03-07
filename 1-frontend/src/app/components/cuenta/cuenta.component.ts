@@ -20,7 +20,7 @@ export class Cuenta implements OnInit {
       this.user.username = responseData.data.username;
       this.user.password = responseData.data.password;
       this.user.admin = responseData.data.admin;
-      console.log(this.user)
+      //console.log(this.user)
     }).catch((err)=>{
       console.log(err);
     });
