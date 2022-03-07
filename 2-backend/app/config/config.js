@@ -1,4 +1,3 @@
 module.exports = {
-    secret: 'supersecret',
-    dburl: "mongodb://localhost:27017/proyectoAngular"
+    dburl: process.env.MONGO_DB_URL
 };

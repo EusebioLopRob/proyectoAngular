@@ -1,0 +1,109 @@
+#Docker compose version
+version: '3.7'
+
+#Services to be powered up
+services:
+
+  ###################################################
+  ############# Servicio de FRONTEND ANGULAR
+  ####################################################
+  frontend:
+    # Imagen de node a utilizar, junto con la última versión estable
+    image: "node:17.4.0"
+    user: "root"
+    container_name: 'frontend'
+    restart: always
+    # Directorio de trabajo dentro del contenedor
+    working_dir: /home/frontend
+    tty: true
+    # Entorno en el que se
+    environment:
+      - NODE_ENV=development
+      - BACKEND_URI=http://backend:8091/api
+      - NODE_OPTIONS=--openssl-legacy-provider
+      - TZ=Europe/Madrid
+    # Se monta el código fuente en el directorio /home/node del contenedor
+    volumes:
+      - ./../1-frontend:/home/frontend
+    # Indica los puertos TCP/IP los cuales se pueden accede a los servicios del contenedor
+    expose:
+      - "4200"
+    # Se mapean los puertos locales al servidor host.
+    ports:
+      - '4200:4200'
+    # Indicamos que el contenedor se encuentra en una red, para que esté visible con el resto de contenedores.
+    networks:
+      - red-apps
+    # Comando que ejecuta el contenedor para arrancar el servidor 'npm run dev'
+    command: bash -c "npm install && npm link @angular/cli && ng serve --host 0.0.0.0"
+
+  ###################################################
+  ############# Servicio de BACKEND
+  ####################################################
+  backend:
+    # Imagen de node a utilizar, junto con la última versión estable
+    image: "node:17.4.0"
+    user: "node"
+    restart: always
+    container_name: 'backend'
+    # Directorio de trabajo dentro del contenedor
+    working_dir: /home/backend
+    tty: true
+    # Entorno en el que se
+    environment:
+      - NODE_ENV=development
+      - TZ=Europe/Madrid
+      - MONGO_DB_URL=mongodb://mongodb:27017/proyectoAngular
+    # Se monta el código fuente en el directorio /home/node del contenedor
+    volumes:
+      - ./../2-backend/:/home/backend
+    # Indica los puertos TCP/IP los cuales se pueden accede a los servicios del contenedor
+    # Expose es para que este disponible desde fuera de Docker, quitar en produccion
+    expose:
+      - "8091"
+    # Se mapean los puertos locales al servidor host.
+    ports:
+      - '8091:8091' # 
+    # Indicamos que el contenedor se encuentra en una red, para que esté visible con el resto de contenedores.
+    networks:
+      - red-apps
+    # Comando que ejecuta el contenedor para arrancar el servidor
+    command: bash -c "npm install && npm run start"
+
+
+  #############################################
+  ############# Servicio de MONGO #############
+  #############################################
+  mongodb:
+    # Imagen de MongoDB a utilizar, junto con la última versión estable.
+    image: "mongo:5.0.5"
+    container_name: mongodb
+    # Reinicia el servicio automáticamente.
+    restart: always
+    #Variables de entorno qe se le pasarán a docker
+    environment:
+    #con TZ le especificamos el localtime que le queremos poner
+      - TZ=Europe/Madrid
+    expose:
+      - '27017'
+    # Se mapean los puertos locales al servidor host.
+    ports:
+      - '27017:27017'
+    # Se indica que tenemos un volumen para la base de datos. Con el objetivo, 
+    #de persistir la información si paramos el contenedor.
+    volumes:
+      - mongodbvol:/data/db
+    # Indicamos que el contenedor se encuentra en una red, para que esté visible 
+    #con el resto de contenedores.
+    networks:
+       - red-apps
+  #############################################
+
+#Adaptador de red comun
+networks:
+  red-apps:
+    driver: bridge
+
+# Definimos los volumenes de persistencia
+volumes:
+  mongodbvol:

@@ -75,7 +75,7 @@ const ShipData = [
         alt: "Acorazado Bismarck",
         name: "Bismarck",
         description: "El icónico Bismarck, una sola salva de su batería principal humilló a toda una nación hundiendo al crucero de batalla HMS Hood.",
-        nation: "RN",
+        nation: "KMS",
         type: "BB",
         caliber: 38,
         unit: "cm"
@@ -96,7 +96,7 @@ const ShipData = [
         alt: "Crucero Pesado Prinz Eugen",
         name: "Prinz Eugen",
         description: "Este hermoso crucero pesado partició junto al Bismack en la Batalla del estrecho de Dinamarca. Sobrevivió al final de la guerra.",
-        nation: "RN",
+        nation: "KMS",
         type: "CB",
         crew: 1340
     }),

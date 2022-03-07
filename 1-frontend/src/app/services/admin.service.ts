@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { Usuario } from 'src/app/models/usuario.model';
 
 @Injectable()
 export class AdminService {
