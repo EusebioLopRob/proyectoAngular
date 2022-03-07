@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   mail: string = "eusebio.lopez.robledo.alu@iesjulioverne.es";
   company: string = "I.E.S. Julio Verne - Sevilla";
   public logged: string|any = sessionStorage.getItem('login');
+  public showInfo: boolean = false;
 
   constructor() {}
 
@@ -24,5 +25,8 @@ export class AppComponent implements OnInit {
       sessionStorage.setItem('login', 'logged');
       window.location.pathname = "";
     }
+  }
+  switchShowInfo(){
+    this.showInfo = !this.showInfo;
   }
 }

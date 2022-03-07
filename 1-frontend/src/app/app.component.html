@@ -5,8 +5,16 @@
   <router-outlet></router-outlet>
 </ng-template>
 <ng-template #elseBlock>
-  <div class="container">
-    <app-login (dologin)="login($event)"></app-login>
+  <div class="container justify-content-center bg-white pt-4 pb-4">
+    <app-login (dologin)="login($event)" *ngIf="!showInfo"></app-login>
+    <hr>
+    <button type="button" [ngClass]="showInfo? 'btn btn-secondary':'btn btn-info'" (click)="switchShowInfo()">
+      <i *ngIf="showInfo" class="bi bi-backspace"></i>
+      <i *ngIf="!showInfo" class="bi bi-info-circle"></i>
+      {{showInfo? 'Volver':'Acerca de'}}
+    </button>
+    <hr>
+    <app-info *ngIf="showInfo"></app-info>
   </div>
 </ng-template>
 <app-footer [name]="name" [mail]="mail" [company]="company">
