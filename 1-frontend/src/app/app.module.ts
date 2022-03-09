@@ -20,6 +20,7 @@ import { Cuenta } from './components/cuenta/cuenta.component';
 import { Info } from './components/info/info.component';
 import { Ficha } from './components/home/ficha/ficha.component';
 import { ShipService } from './services/ship.service';
+import { PasswordPipe } from './pipes/password.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ShipService } from './services/ship.service';
     Error,
     Cuenta,
     Info,
-    Ficha
+    Ficha,
+    PasswordPipe
   ],
   imports: [
     BrowserModule,

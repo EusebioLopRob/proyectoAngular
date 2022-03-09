@@ -24,11 +24,11 @@
                     <i class="bi bi-envelope-slash"></i> &nbsp;
                     Contraseña
                 </span>
-                <input type="text" name="pass" id="pass" *ngIf="mode!='edit'" 
+                <input type="password" name="pass" id="pass" *ngIf="mode!='edit'" 
                     ngClass="{{mode=='login'? 'form-control col-4':'form-control'}}" [(ngModel)]="user.password" 
                     placeholder="Introduzca una contraseña..." required
                     pattern=".{4,}" title="Introduzca al menos 4 caracteres">
-                <input type="text" name="pass" id="pass" *ngIf="sentUser" 
+                <input type="password" name="pass" id="pass" *ngIf="sentUser" 
                     class="form-control" [(ngModel)]="sentUser.password" 
                     placeholder="Introduzca una contraseña..." required
                     pattern=".{4,}" title="Introduzca al menos 4 caracteres">

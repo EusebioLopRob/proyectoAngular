@@ -10,7 +10,7 @@
     <tbody>
       <tr *ngFor="let usuario of userlist">
         <td class="align-middle">{{usuario.username}}</td>
-        <td class="align-middle">{{usuario.password}}</td>
+        <td class="align-middle">{{usuario.password | password}}</td>
         <td [ngClass]="usuario.admin? 'align-middle text-success':'align-middle text-danger'"
             [ngStyle]="{'font-weight': 'bold'}">
           {{usuario.admin? "Sí":"No"}}

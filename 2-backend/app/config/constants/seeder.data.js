@@ -3,16 +3,17 @@ const { ObjectId } = require("bson");
 const User = require("../../models").user;
 const Ship = require("../../models").ship;
 
+
 //_id del usuario administrador
 const AdminId = ObjectId("621a69846bf21f002485cb1c");
 
 //Usuario administrador
-const UserAdminData = new User({
-    _id: AdminId,
+var UserAdminData = {
+    id: AdminId,
     username: "admin",
     password: "admin",
     admin: true
-});
+};
 
 //Datos de barcos
 const ShipData = [

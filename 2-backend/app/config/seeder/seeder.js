@@ -5,9 +5,12 @@ const AuxFun = require("../../utils/auxiliary.functions");
 //_id del usuario administrador
 const AdminId = require("../constants/seeder.data").AdminId;
 //Usuario administrador
-const AdminData = require("../constants/seeder.data").UserAdminData;
+var adminData = require("../constants/seeder.data").UserAdminData;
 //Datos de barcos
 const ShipDataList = require("../constants/seeder.data").ShipData;
+//módulo bcrypt
+const bcrypt = require('bcrypt');
+const BCRYPT_SALT_ROUNDS = 12;
 
 //Funcion seeder: se encarga de crear al usuario administrador
 async function createUserAdmin(){
@@ -25,8 +28,17 @@ async function createUserAdmin(){
             //Declaramos los mensajes
             let createSuccesMessage = "Usuario administrador creado con éxito";
             let createErrorMessage = "Error al crear el usuario administrador";
+            //Encriptamos la contraseña del administrador
+            adminData.password = await bcrypt.hash(adminData.password, BCRYPT_SALT_ROUNDS);
+            //Creamos la instancia de User
+            let administrador = new User({
+                _id: adminData.id,
+                username: adminData.username,
+                password: adminData.password,
+                admin: adminData.admin
+            });
             //Realizamos la inserción de datos en la base de datos
-            let createUserAdmin = await AuxFun.saveDB(AdminData,createSuccesMessage,createErrorMessage);
+            let createUserAdmin = await AuxFun.saveDB(administrador,createSuccesMessage,createErrorMessage);
             console.log(createUserAdmin.message);
         } else{
             //Si encontramos datos o nos da un error mostramos mensaje

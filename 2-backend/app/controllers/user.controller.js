@@ -2,6 +2,8 @@
 const AuxFun = require("../utils/auxiliary.functions");
 const User = require("../models").user;
 const AdminId = require("../config/constants/seeder.data").AdminId;
+const bcrypt = require('bcrypt');
+const BCRYPT_SALT_ROUNDS = 12;
 
 /**
  * Esta función devuelve los datos de todos los usuarios de la base de datos
@@ -78,10 +80,12 @@ async function create(req,res){
         //Declaramos los mensajes
         let successMsg = "Usuario creado con éxito";
         let errMsg = "Error al crear usuario";
+        //Ecriptamos la contraseña
+        let hashedPassword = await bcrypt.hash(userdata.password, BCRYPT_SALT_ROUNDS);
         //creamos la estructura para guardar los datos
         let dataSchema = new User({
             username: userdata.username,
-            password: userdata.password,
+            password: hashedPassword,
             admin: userdata.admin
         });
         //Comprobamos duplicado de nommbre
@@ -224,21 +228,28 @@ async function login(req,res){
         //Recogemos los datos de la petición
         let userdata = req.body;
         //Declaramos los mensajes
-        let successMsg = "Datos del usuario encontrados";
+        let successMsg = "Credenciales correctas, acceso al sistema permitido";
         let errMsg = "Error al buscar datos del usuario";
-        //creamos la estructura para guardar los datos
+        //Datos del usuario que intenta realizar login
         let userData = {
             username: userdata.username,
             password: userdata.password
         };
-        //Realizamos la búsqueda
-        let buscaUsuario = await AuxFun.findOneDB(User,{username: userData.username, password: userData.password},'',successMsg,errMsg);
+        //Realizamos la búsqueda por nombre de usuario
+        let buscaUsuario = await AuxFun.findOneDB(User,{username: userData.username},'',successMsg,errMsg);
         if(buscaUsuario.success && !buscaUsuario.data){
             //Si no hay datos devolvemos resuesta acorde
-            return res.status(200).send({message: "No existe el usuario solicitado", code: 2000})
+            return res.status(200).send({message: "Usuario no encontrado", code: 3000});
         } else if(buscaUsuario.success){
-            //Si hay datos devolvemos los datos
-            return res.status(200).send({message: buscaUsuario.message, data: buscaUsuario.data, code: 2000});
+            //Si hay datos utilizamos la función de comparar para ver si las contraseñas coinciden
+            let comparacion = await bcrypt.compare(userdata.password, buscaUsuario.data.password);
+            //Si las contraseñas coinciden enviamos los datos
+            if(comparacion){
+                return res.status(200).send({message: buscaUsuario.message, data: buscaUsuario.data, code: 2000});
+            }else{
+                //Si no coinciden devolvemos respuesta acorde
+                return res.status(200).send({message: "Contraseña incorrecta", code: 3000});
+            }
         } else {
             //Si se produce un error el la búsqueda enviamos respuesta de error
             return res.status(500).send({message: buscaUsuario.message, code: 3000});
