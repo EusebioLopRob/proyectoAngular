@@ -77,6 +77,10 @@ export class Info implements OnInit {
     {
       nombre: "mongoose",
       valor: "v6.1.8"
+    },
+    {
+      nombre: "bcrypt",
+      valor: "v5.0.1"
     }
   ];
   public directivas: any = [
