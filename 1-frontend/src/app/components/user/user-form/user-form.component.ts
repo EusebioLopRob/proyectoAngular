@@ -27,6 +27,9 @@ export class UserForm implements OnInit {
     this.userService.login({username: this.user.username, password: this.user.password}).then((response)=>{
       let datosRespuesta = response.data
       this.dologin.emit(datosRespuesta.data);
+      if(datosRespuesta.code == 3000){
+        this.backendReject = datosRespuesta.message;
+      }
     }).catch((err)=>{
       console.log(err);
     });
