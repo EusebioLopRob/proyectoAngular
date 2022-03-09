@@ -4,7 +4,11 @@ module.exports = mongoose => {
       {
         username: String,
         password: String,
-        admin: Boolean
+        admin: Boolean,
+        nombre: String,
+        apellido: String,
+        nif: String,
+        email: String
       },
       { versionKey: false, timestamps: { createdAt: true, updatedAt: false } }
     );

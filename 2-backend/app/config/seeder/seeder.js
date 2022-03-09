@@ -35,7 +35,11 @@ async function createUserAdmin(){
                 _id: adminData.id,
                 username: adminData.username,
                 password: adminData.password,
-                admin: adminData.admin
+                admin: adminData.admin,
+                nombre: adminData.nombre,
+                apellido: adminData.apellido,
+                nif: adminData.nif,
+                email: adminData.email
             });
             //Realizamos la inserción de datos en la base de datos
             let createUserAdmin = await AuxFun.saveDB(administrador,createSuccesMessage,createErrorMessage);

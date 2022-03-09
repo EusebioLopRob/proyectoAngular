@@ -12,7 +12,11 @@ var UserAdminData = {
     id: AdminId,
     username: "admin",
     password: "admin",
-    admin: true
+    admin: true,
+    nombre: "Administrador",
+    apellido: "Administrador",
+    nif: "28841013W",
+    email: "eusebio.lopez.robledo.alu@iesjulioverne.es"
 };
 
 //Datos de barcos

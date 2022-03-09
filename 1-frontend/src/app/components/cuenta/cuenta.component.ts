@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class Cuenta implements OnInit {
 
   constructor(private userService: UserService) { }
-  public user: Usuario = new Usuario("","","",true);
+  public user: Usuario = new Usuario("","","",true,"","","","");
 
 
   ngOnInit(): void {
@@ -20,6 +20,10 @@ export class Cuenta implements OnInit {
       this.user.username = responseData.data.username;
       this.user.password = responseData.data.password;
       this.user.admin = responseData.data.admin;
+      this.user.nombre = responseData.data.nombre;
+      this.user.apellido = responseData.data.apellido;
+      this.user.nif = responseData.data.nif;
+      this.user.email = responseData.data.email;
       //console.log(this.user)
     }).catch((err)=>{
       console.log(err);

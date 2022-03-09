@@ -5,7 +5,7 @@
             <div class="input-group">
                 <span ngClass="{{mode=='login'? 'input-group-text col-lg-2 col-md-3 col-5':'input-group-text col-5'}}">
                     <i class="bi bi-person-circle"></i> &nbsp;
-                    {{mode=='add'? 'Nuevo usuario':'Nombre'}}
+                    {{mode=='add'? 'Nuevo usuario':'Nombre user'}}
                 </span>
                 <input type="text" name="username" id="username" *ngIf="mode!='edit'"
                     ngClass="{{mode=='login'? 'form-control col-4':'form-control'}}" [(ngModel)]="user.username"
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="mb-5" *ngIf="mode=='add'">
+        <div class="mb-3" *ngIf="mode=='add'">
             <div class="input-group">
                 <span class="input-group-text col-5">
                     <i class="bi bi-person-lines-fill"></i> &nbsp;
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="mb-5" *ngIf="sentUser">
+        <div class="mb-3" *ngIf="sentUser">
             <div class="input-group">
                 <span class="input-group-text col-5">
                     <i class="bi bi-person-lines-fill"></i> &nbsp;
@@ -60,6 +60,73 @@
                     <option [value]="false">Usuario normal</option>
                     <option [value]="true">Administrador</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="mb-3" *ngIf="mode!='login'">
+            <div class="input-group">
+                <span class="input-group-text col-5">
+                    <i class="bi bi-person-square"></i> &nbsp;
+                    Nombre
+                </span>
+                <input type="text" name="nombre" id="nombre" *ngIf="mode!='edit'"
+                    ngClass="{{mode=='login'? 'form-control col-4':'form-control'}}" [(ngModel)]="user.nombre"
+                    placeholder="Introduzca nombre..." required>
+                <input type="text" name="nombre" id="nombre" *ngIf="sentUser"
+                    class="form-control" [(ngModel)]="sentUser.nombre"
+                    placeholder="Introduzca nombre..." required>
+                <small *ngIf="nombreError!=''" class="text-danger col-10"><i class="bi bi-exclamation-triangle-fill"></i> {{nombreError}}</small>
+                <div class="col d-md-block d-none" *ngIf="mode=='login'"></div>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="mode!='login'">
+            <div class="input-group">
+                <span class="input-group-text col-5">
+                    <i class="bi bi-person-bounding-box"></i> &nbsp;
+                    Apellido
+                </span>
+                <input type="text" name="apellido" id="apellido" *ngIf="mode!='edit'"
+                    ngClass="{{mode=='login'? 'form-control col-4':'form-control'}}" [(ngModel)]="user.apellido"
+                    placeholder="Introduzca apellido..." required>
+                <input type="text" name="apellido" id="apellido" *ngIf="sentUser"
+                    class="form-control" [(ngModel)]="sentUser.apellido"
+                    placeholder="Introduzca apellido..." required>
+                <small *ngIf="apellidoError!=''" class="text-danger col-10"><i class="bi bi-exclamation-triangle-fill"></i> {{apellidoError}}</small>
+                <div class="col d-md-block d-none" *ngIf="mode=='login'"></div>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="mode!='login'">
+            <div class="input-group">
+                <span class="input-group-text col-5">
+                    <i class="bi bi-person-badge"></i> &nbsp;
+                    NIF
+                </span>
+                <input type="text" name="nif" id="nif" *ngIf="mode!='edit'"
+                    ngClass="{{mode=='login'? 'form-control col-4':'form-control'}}" [(ngModel)]="user.nif"
+                    placeholder="Introduzca NIF..." required
+                    pattern="[0-9]{8}[A-Za-z]" (input)="validarNif(f)">
+                <input type="text" name="nif" id="nif" *ngIf="sentUser"
+                    class="form-control" [(ngModel)]="sentUser.nif"
+                    placeholder="Introduzca NIF..." required
+                    pattern="[0-9]{8}[A-Za-z]" (input)="validarNif(f)">
+                <small *ngIf="nifError!=''" class="text-danger col-10"><i class="bi bi-exclamation-triangle-fill"></i> {{nifError}}</small>
+                <div class="col d-md-block d-none" *ngIf="mode=='login'"></div>
+            </div>
+        </div>
+        <div class="mb-5" *ngIf="mode!='login'">
+            <div class="input-group">
+                <span class="input-group-text col-5">
+                    <i class="bi bi-envelope"></i> &nbsp;
+                    E-mail
+                </span>
+                <input type="email" name="email" id="email" *ngIf="mode!='edit'"
+                    ngClass="{{mode=='login'? 'form-control col-4':'form-control'}}" [(ngModel)]="user.email"
+                    placeholder="Introduzca E-mail..." required>
+                <input type="email" name="email" id="email" *ngIf="sentUser"
+                    class="form-control" [(ngModel)]="sentUser.email"
+                    placeholder="Introduzca E-mail..." required>
+                <small *ngIf="emailError!=''" class="text-danger col-10"><i class="bi bi-exclamation-triangle-fill"></i> {{emailError}}</small>
+                <div class="col d-md-block d-none" *ngIf="mode=='login'"></div>
             </div>
         </div>
 

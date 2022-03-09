@@ -86,7 +86,11 @@ async function create(req,res){
         let dataSchema = new User({
             username: userdata.username,
             password: hashedPassword,
-            admin: userdata.admin
+            admin: userdata.admin,
+            nombre: userdata.nombre,
+            apellido: userdata.apellido,
+            nif: userdata.nif,
+            email: userdata.email
         });
         //Comprobamos duplicado de nommbre
         let buscaDupe = await AuxFun.findDB(User,{username: dataSchema.username})
@@ -142,7 +146,11 @@ async function update(req,res){
             let updateData = {
                 username: userdata.username,
                 password: userdata.password,
-                admin: userdata.admin
+                admin: userdata.admin,
+                nombre: userdata.nombre,
+                apellido: userdata.apellido,
+                nif: userdata.nif,
+                email: userdata.email
             };
             //Comprobamos duplicado de nommbre
             let buscaDupe = await AuxFun.findDB(User,{username: updateData.username})

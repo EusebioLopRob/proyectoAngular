@@ -18,22 +18,22 @@ export class Userlist implements OnInit {
   ngOnInit(): void {
     this.populateUserlist();
   }
-  populateUserlist(){
+  populateUserlist() {
     this.userService.getAllUsers()
-      .then( (response) => {
+      .then((response) => {
         let respuesta = response.data.data;
-        respuesta.forEach((element: { _id: string, username: string, password: string, admin: boolean }) => {
-          let usuario = new Usuario(element._id, element.username, element.password, element.admin)
+        respuesta.forEach((element: { _id: string, username: string, password: string, admin: boolean, nombre: string, apellido: string, nif: string, email: string }) => {
+          let usuario = new Usuario(element._id, element.username, element.password, element.admin, element.nombre, element.apellido, element.nif, element.email)
           this.userlist.push(usuario);
         });
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log(err);
       });
   }
-  sendId(id: string){
+  sendId(id: string) {
     this.sendUserId.emit(id);
   }
-  sendUser(user: Usuario){
+  sendUser(user: Usuario) {
     this.sendUserObject.emit(user);
   }
 }
