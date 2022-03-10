@@ -151,9 +151,9 @@ export class UserForm implements OnInit {
     return valid;
   }
   validarNif(f: NgForm) {
-    f.controls['nif'].setErrors(null)
     if (this.mode == 'add') {
       if (this.user.nif.length == 9) {
+        f.controls['nif'].setErrors(null)
         let nifArray = Array.from(this.user.nif);
         let numArray = nifArray.splice(0, 8);
         let numero = Number.parseInt(numArray.join(""));
@@ -167,6 +167,7 @@ export class UserForm implements OnInit {
       }
     } else {
       if (this.sentUser && this.sentUser.nif.length == 9) {
+        f.controls['nif'].setErrors(null)
         let nifArray = Array.from(this.sentUser.nif);
         let numArray = nifArray.splice(0, 8);
         let numero = Number.parseInt(numArray.join(""));
